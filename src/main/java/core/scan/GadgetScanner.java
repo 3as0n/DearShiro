@@ -1,5 +1,8 @@
 package core.scan;
 
+/**
+ * To fuzz gadget
+ */
 public class GadgetScanner implements ShiroScanner{
 
     private String base;
@@ -11,6 +14,6 @@ public class GadgetScanner implements ShiroScanner{
 
     @Override
     public void scan() throws Exception {
-        System.out.println("Gadget");
+        //TODO: 获取所有可用Gadget
     }
 }

@@ -1,5 +1,6 @@
 package core;
 
+import core.scan.GadgetExec;
 import core.scan.GadgetScanner;
 import core.scan.KeyScanner;
 import core.scan.ShiroScanner;
@@ -12,7 +13,8 @@ public class Main {
 
     static {
         scanModule.put("key", new KeyScanner());
-        scanModule.put("gadget", new GadgetScanner());
+        scanModule.put("gadgetfuzz", new GadgetScanner());
+        scanModule.put("gadgetexec", new GadgetExec());
     }
 
     public static void main(String[] args) throws Exception {

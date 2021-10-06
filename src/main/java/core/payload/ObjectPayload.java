@@ -1,5 +1,5 @@
 package core.payload;
 
 public interface ObjectPayload {
-    Object getObjectPayload();
+    Object getObjectPayload(String command);
 }

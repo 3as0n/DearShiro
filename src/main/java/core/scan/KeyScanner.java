@@ -27,7 +27,7 @@ public class KeyScanner implements ShiroScanner {
             Util util = new Util();
             ScanKey scanKey = new ScanKey();
             key = scanner.nextLine();
-            byte[] serialize = util.serialize(scanKey.getObjectPayload());
+            byte[] serialize = util.serialize(scanKey.getObjectPayload(null));
             String rememberMe = util.getRememberMe(serialize, key);
             System.out.println("[+] Test key: " + key);
             rightKey = !connection.checkKey(base, rememberMe);
