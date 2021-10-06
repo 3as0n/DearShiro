@@ -37,6 +37,12 @@
             <artifactId>javassist</artifactId>
             <version>3.23.1-GA</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9</version>
+        </dependency>
     </dependencies>
 
 </project>

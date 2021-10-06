@@ -7,7 +7,7 @@ import core.scan.ShiroScanner;
 
 import java.util.HashMap;
 
-public class Main {
+public class DearShiro {
 
     private static final HashMap<String, ShiroScanner> scanModule = new HashMap<>();
 

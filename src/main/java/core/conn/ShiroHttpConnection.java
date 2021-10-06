@@ -32,7 +32,7 @@ public class ShiroHttpConnection {
      */
     public boolean checkFalseKey(String rememberMe) {
         try {
-            this.sendRememberMe(rememberMe);
+            this.sendRememberMe(rememberMe, true);
             int responseCode = connection.getResponseCode();
             System.out.println("[-] Response Code: " + responseCode);
             Map<String, List<String>> fields = connection.getHeaderFields();
@@ -47,12 +47,15 @@ public class ShiroHttpConnection {
         return false;
     }
 
-    public void sendRememberMe(String rememberMe) throws Exception {
+    public void sendRememberMe(String rememberMe, boolean keyCheck) throws Exception {
         // 探测key，请求方式只能为GET，使用POST请求方式获得响应头的时候会出现BUG
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36");
         connection.setRequestProperty("Cookie", "rememberMe=" + rememberMe);
         connection.setDoOutput(true);
+        if (!keyCheck) {
+            connection.disconnect();
+        }
     }
 }
