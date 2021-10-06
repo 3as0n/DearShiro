@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 //        String module = args[0];
-        String module = "gadget";
+        String module = "key";
         String base = "http://127.0.0.1:8000/login.jsp";
         ShiroScanner scanner = scanModule.get(module);
         scanner.setBase(base);

