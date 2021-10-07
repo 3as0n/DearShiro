@@ -33,8 +33,6 @@ public class ShiroHttpConnection {
     public boolean checkFalseKey(String rememberMe) {
         try {
             this.sendRememberMe(rememberMe, true);
-            int responseCode = connection.getResponseCode();
-            System.out.println("[-] Response Code: " + responseCode);
             Map<String, List<String>> fields = connection.getHeaderFields();
             List<String> setCookie = fields.get("Set-Cookie");
 
@@ -54,6 +52,8 @@ public class ShiroHttpConnection {
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36");
         connection.setRequestProperty("Cookie", "rememberMe=" + rememberMe);
         connection.setDoOutput(true);
+        int responseCode = connection.getResponseCode();
+        System.out.println("[-] Response Code: " + responseCode);
         if (!keyCheck) {
             connection.disconnect();
         }

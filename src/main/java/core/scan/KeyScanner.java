@@ -11,8 +11,11 @@ public class KeyScanner implements ShiroScanner {
 
     private String base;
 
-    @Override
-    public void setBase(String base) {
+//    @Override
+//    public void setBase(String base) {
+//        this.base = base;
+//    }
+    public KeyScanner(String base) {
         this.base = base;
     }
 
