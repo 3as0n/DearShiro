@@ -10,13 +10,15 @@ public class ScannerFactory {
         this.target = target;
     }
 
-    public ShiroScanner getScanner(String module) {
+    public ShiroScanner getScanner(String module) throws ClassNotFoundException {
         switch (module) {
             case "key":
                 return new KeyScanner(target);
             case "gadgetfuzz":
                 return new GadgetScanner(target);
+            case "gadgetexec":
+                return new GadgetExec(target);
         }
-        return null;
+        throw new ClassNotFoundException("Module not fount, plz check again");
     }
 }
