@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 
 /**
  * Based on CommonsBeanUtils
- * Version: 1.8.3
+ * Dependency: CommonsBeanUtils = 1.8.3
  */
 public class NoCC implements ObjectPayload{
     @Override

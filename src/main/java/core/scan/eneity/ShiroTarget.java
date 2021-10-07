@@ -1,4 +1,4 @@
-package core.scan;
+package core.scan.eneity;
 
 public class ShiroTarget {
     /**

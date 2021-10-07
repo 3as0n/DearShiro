@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import core.conn.ShiroHttpConnection;
 import core.payload.ObjectPayload;
 import core.payload.ScanKey;
+import core.scan.eneity.ShiroTarget;
 import core.util.ConfigPropertiesReader;
 import core.util.Payload;
 import core.util.RandomID;

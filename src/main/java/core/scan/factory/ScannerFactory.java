@@ -1,6 +1,7 @@
 package core.scan.factory;
 
 import core.scan.*;
+import core.scan.eneity.ShiroTarget;
 
 public class ScannerFactory {
     private final ShiroTarget target;

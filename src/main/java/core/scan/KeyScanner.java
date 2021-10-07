@@ -2,6 +2,7 @@ package core.scan;
 
 import core.conn.ShiroHttpConnection;
 import core.payload.ScanKey;
+import core.scan.eneity.ShiroTarget;
 import core.util.Util;
 
 import java.io.File;

