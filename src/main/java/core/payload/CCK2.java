@@ -11,6 +11,7 @@ import java.util.Map;
 
 
 /**
+ * Modify CommonsCollectionsK1 to work with version 4.0
  * Dependency: CommonsCollections4 = 4.0
  */
 public class CCK2 implements ObjectPayload {

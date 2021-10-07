@@ -5,13 +5,12 @@ import core.util.Util;
 import org.apache.commons.collections.functors.InvokerTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import org.reflections.Reflections;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Use CommonsCollectionsK 1~4 to replace CommonsCollections 1~7
+ * Use CommonsCollectionsK1 to replace CommonsCollections
  * Dependency: CommonsCollections <= 3.2.1
  */
 public class CCK1 implements ObjectPayload{

