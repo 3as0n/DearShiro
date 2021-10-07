@@ -1,5 +1,7 @@
 # DearShiro
 
+## Start
+
 **一个不万能的Shiro扫描工具**
 
 人类低质量代码，就当练个手。
@@ -22,6 +24,21 @@
 - CommonsCollectionsK1
 - CommonsCollectionsK2
 - JRMPClient（需要在VPS上首先开启一个JRMPServer）
+
+## Usage
+
+```python
+java -jar dearshiro.jar -m {module} -b {baseurl} [-k] [-g] [-c]
+
+# key module 扫描key
+java -jar dearshiro.jar -m "key" -b {baseurl}
+
+# dadgetfuzz module 扫描可用gadget
+java -jar dearshrio.jar -m "gadgetfuzz" -b {baseurl} -k {key}
+
+# gadgetexec module 使用gadget执行任意命令
+java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {command}
+```
 
 初步测试：
 
