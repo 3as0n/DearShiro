@@ -10,3 +10,4 @@
 目前可用Gadget:
 - CommonsBeanUtilsNoCC
 - CommonsCollectionsK1
+- CommonsCollectionsK2
