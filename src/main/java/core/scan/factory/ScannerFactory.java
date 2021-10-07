@@ -1,19 +1,20 @@
 package core.scan.factory;
 
-import core.scan.GadgetExec;
-import core.scan.GadgetScanner;
-import core.scan.KeyScanner;
-import core.scan.ShiroScanner;
+import core.scan.*;
 
 public class ScannerFactory {
-    public ShiroScanner getScanner(String module, String base, String key, String command) {
+    private final ShiroTarget target;
+
+    public ScannerFactory(ShiroTarget target) {
+        this.target = target;
+    }
+
+    public ShiroScanner getScanner(String module) {
         switch (module) {
             case "key":
-                return new KeyScanner(base);
+                return new KeyScanner(target);
             case "gadgetfuzz":
-                return new GadgetScanner(base, key);
-            case "gadgetexec":
-                return new GadgetExec(base, key, command);
+                return new GadgetScanner(target);
         }
         return null;
     }

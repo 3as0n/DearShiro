@@ -9,14 +9,10 @@ import java.util.Scanner;
 
 public class KeyScanner implements ShiroScanner {
 
-    private String base;
+    private final ShiroTarget target;
 
-//    @Override
-//    public void setBase(String base) {
-//        this.base = base;
-//    }
-    public KeyScanner(String base) {
-        this.base = base;
+    public KeyScanner(ShiroTarget target) {
+        this.target = target;
     }
 
     @Override
@@ -25,7 +21,7 @@ public class KeyScanner implements ShiroScanner {
         String key = "";
         boolean falseKey = true;
         while (scanner.hasNextLine() && falseKey) {
-            ShiroHttpConnection connection = new ShiroHttpConnection(base);
+            ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
             Util util = new Util();
             ScanKey scanKey = new ScanKey();
             key = scanner.nextLine();

