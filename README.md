@@ -4,6 +4,7 @@
 
 目前已完成:
 - Key的探测
+- Gadget的探测
 
 
 目前可用Gadget:
