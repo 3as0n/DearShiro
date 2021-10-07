@@ -22,12 +22,12 @@ public class GadgetScanner implements ShiroScanner {
     /**
      * ceye token
      */
-    private final String token = ConfigPropertiesReader.getProp("ceye.token");
+    private static final String token = ConfigPropertiesReader.getProp("ceye.token");
 
     /**
      * ceye identifier
      */
-    private final String identifier = ConfigPropertiesReader.getProp("ceye.identifier");
+    private static final String identifier = ConfigPropertiesReader.getProp("ceye.identifier");
 
     /**
      * 可用Gadget
