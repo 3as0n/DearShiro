@@ -40,6 +40,4 @@ public class KeyScanner implements ShiroScanner {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-    }
 }

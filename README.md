@@ -25,6 +25,10 @@ The built-in gadget:
 - CommonsCollectionsK3
 - CommonsCollectionsK4
 
+Change the default key list: Add your custom-key into the `resources/key`，then repackage the project.
+
+To detect the available gadget, I use the `ceye` platform, so you need to change the `token` and `identifier` on `resources/config.properties`, the repackage the project.
+
 ## Usage
 
 ```python
@@ -84,6 +88,5 @@ Simple test on localhost:
 NoCC
 CCK1
 ########Available Gadget##########
-
 ```
 
