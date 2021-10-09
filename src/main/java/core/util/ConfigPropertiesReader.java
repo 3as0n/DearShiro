@@ -1,21 +1,22 @@
 package core.util;
 
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.security.PublicKey;
 import java.util.Properties;
 
 public class ConfigPropertiesReader {
+    private static Properties properties = new Properties();
+    private static final InputStream patch = ClassLoader.getSystemResourceAsStream("config.properties");
 
-    public static String getProp(String key) {
+    static {
         try {
-            InputStream patch = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
-            Properties properties = new Properties();
             properties.load(patch);
-            return properties.getProperty(key);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
+    }
+
+    public static String getProp(String key) {
+        return properties.getProperty(key);
     }
 }

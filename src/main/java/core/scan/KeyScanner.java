@@ -19,7 +19,6 @@ public class KeyScanner implements ShiroScanner {
 
     @Override
     public void scan() throws Exception {
-//        Scanner scanner = new Scanner(new File("resources/key"));
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("key");
         assert inputStream != null;
         Scanner scanner = new Scanner(inputStream);
