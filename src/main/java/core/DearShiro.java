@@ -1,7 +1,7 @@
 package core;
 
 import com.beust.jcommander.JCommander;
-import core.jcommander.Args;
+import core.parse.Args;
 import core.scan.*;
 import core.scan.eneity.ShiroTarget;
 import core.scan.factory.ScannerFactory;
@@ -9,15 +9,16 @@ import core.scan.factory.ScannerFactory;
 public class DearShiro {
 
     public static void main(String[] args) throws Exception {
-//        args = new String[]{"-m", "gadgetfuzz", "-b", "http://127.0.0.1:8000/login.jsp"};
+        Args argv = new Args();
+        JCommander jCommander = JCommander.newBuilder().addObject(argv).build();
+        jCommander.parse(args);
 
-        if (args.length < 2) {
+        if (argv.help) {
+            jCommander.usage();
             printUsage();
             System.exit(-1);
         }
 
-        Args argv = new Args();
-        JCommander.newBuilder().addObject(argv).build().parse(args);
         String module = argv.module;
         String base = argv.base;
         String key = argv.key;

