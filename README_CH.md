@@ -2,21 +2,21 @@
 
 ## Start
 
-**A Simple Shiro Scanner**
+**一个不万能的Shiro扫描工具**
 
-**Just for practice**
+人类低质量代码，就当练个手。
 
-Done:
-- Detect the key
-- Detect the available gadget
-- Use the gadget to execute command
+目前已完成:
+- Key的探测
+- 可用Gadget的探测
+- 利用Gadget执行命令
 
 
-TODO:
-- Graphical tool
-- Fix some unknowns bug
+后续todo:
+- 图形化？
+- 修复某些未知BUG
 
-The built-in gadget:
+工具内置Gadget:
 - CommonsBeanUtilsNoCC
 - CommonsCollectionsK1
 - CommonsCollectionsK2
