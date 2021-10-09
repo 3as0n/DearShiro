@@ -6,6 +6,8 @@
 
 **Just for practice**
 
+[中文文档](https://github.com/F4ded/DearShiro/blob/master/README_CH.md)
+
 Done:
 - Detect the key
 - Detect the available gadget
