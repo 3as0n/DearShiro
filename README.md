@@ -57,7 +57,7 @@ java -jar dearshrio.jar -m "gadgetfuzz" -b {baseurl} -k {key}
 java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {command}
 ```
 
-初步测试：
+Simple test in localhost：
 
 ```
 ❯ java -jar dearshiro.jar -m "key" -b "http://127.0.0.1:8000/login.jsp"                                                                              
