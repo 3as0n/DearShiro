@@ -2,32 +2,30 @@
 
 ## Start
 
-**A Simple Shiro Scanner**
+**一个不万能的Shiro扫描工具**
 
-**Just for practice**
+人类低质量代码，就当练个手。
 
-[中文文档](https://github.com/F4ded/DearShiro/blob/master/README_CH.md)
-
-Done:
-- Detect the key
-- Detect the available gadget
-- Use the gadget to execute command
+目前已完成:
+- Key的探测
+- 可用Gadget的探测
+- 利用Gadget执行命令
 
 
-TODO:
-- Graphical tool
-- Fix some unknowns bug
+后续todo:
+- 图形化？
+- 修复某些未知BUG
 
-The built-in gadget:
+工具内置Gadget:
 - CommonsBeanUtilsNoCC
 - CommonsCollectionsK1
 - CommonsCollectionsK2
 - CommonsCollectionsK3
 - CommonsCollectionsK4
 
-Change the default key list: Add your custom-key into the `resources/key`，then repackage the project.
+修改默认key列表：修改`resouces`文件夹下的`key`文件然后重新打包即可。
 
-To detect the available gadget, I use the `ceye` platform, so you need to change the `token` and `identifier` on `resources/config.properties`, then repackage the project.
+由于探测Gadget使用了ceye平台，所以需要把`config.properties`文件夹中的token和identifier修改成自己的信息，然后重新打包即可。
 
 ## Usage
 
@@ -61,7 +59,7 @@ java -jar dearshrio.jar -m "gadgetfuzz" -b {baseurl} -k {key}
 java -jar dearshiro.jar -m "gadgetexec" -b {baseurl} -k {key} -g {gadget} -c {command}
 ```
 
-Simple test on localhost:
+本地测试：
 
 ```
 ❯ java -jar dearshiro.jar -m "key" -b "http://127.0.0.1:8000/login.jsp"                                                                              
@@ -89,4 +87,3 @@ NoCC
 CCK1
 ########Available Gadget##########
 ```
-
